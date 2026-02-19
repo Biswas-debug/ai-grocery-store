@@ -1,0 +1,20 @@
+async function login(){
+
+ const res=await fetch("/login",{
+  method:"POST",
+  headers:{"Content-Type":"application/json"},
+  body:JSON.stringify({
+   username:user.value,
+   password:pass.value
+  })
+ });
+
+ const data=await res.json();
+
+ if(data.success){
+  localStorage.setItem("admin","true");
+  window.location="admin.html";
+ }else{
+  alert("Wrong login");
+ }
+}

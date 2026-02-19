@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin Panel</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+<div>⚙️ Admin Panel</div>
+<div>
+<a href="index.html">Home</a>
+<a href="shop.html">Customer View</a>
+<a href="#" onclick="logout()">Logout</a>
+</div>
+</nav>
+
+<h1>Admin Dashboard</h1>
+
+<div class="login-box">
+
+<h3>Add Product</h3>
+
+<input id="name" placeholder="Product Name">
+<input id="price" type="number" placeholder="Price">
+<input id="image" placeholder="Image URL">
+<input id="stock" type="number" placeholder="Stock">
+
+<button onclick="addProduct()">Add Product</button>
+
+</div>
+
+<script>
+
+if(localStorage.getItem("admin")!=="true"){
+window.location="login.html";
+}
+
+function logout(){
+localStorage.removeItem("admin");
+window.location="index.html";
+}
+
+function addProduct(){
+
+const product={
+name:name.value,
+price:price.value,
+image:image.value,
+stock:stock.value
+};
+
+let products=JSON.parse(localStorage.getItem("products")) || [];
+
+products.push(product);
+
+localStorage.setItem("products",JSON.stringify(products));
+
+alert("✅ Product Added!");
+
+name.value="";
+price.value="";
+image.value="";
+stock.value="";
+}
+
+</script>
+
+</body>
+</html>
