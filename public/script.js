@@ -1,28 +1,28 @@
 async function buy(product, price) {
+
   try {
-    const res = await fetch(
-      "https://ai-grocery-api.onrender.com/buy", // CHANGE AFTER DEPLOY
+
+    const response = await fetch(
+      "https://ai-grocery-store.onrender.com/buy",
       {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          product,
-          price,
-        }),
+          product: product,
+          price: price,
+          email: prompt("Enter your email")
+        })
       }
     );
 
-    const data = await res.json();
+    const data = await response.json();
 
-    if (data.success) {
-      alert("✅ Order placed! Email sent to seller.");
-    } else {
-      alert("❌ Order failed");
-    }
+    alert(data.message);
+
   } catch (err) {
+    alert("Server not connected!");
     console.log(err);
-    alert("Server not connected.");
   }
 }
